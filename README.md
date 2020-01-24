@@ -50,6 +50,18 @@ git log --pretty=format: format the output of a git log command to display speci
 
 man git-log --> local documentation on using the 'git log' command
 
+
+///
+examples of "git log"
+
+git log --since="4 days ago"
+
+git log -S build
+
+git stat
+
+///
+
 # Python
 #!/usr/bin/python in linux then chmod +x in order to make it executable; To execute ./file.py
 ----
