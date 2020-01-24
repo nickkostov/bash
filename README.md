@@ -46,7 +46,7 @@ git log --graph --> show a textual graph of a project's commit history
 
 git log --stat --> show statistics of the files with each commit
 
-git log --pretty=format: format the output of a git log command to display specific fields
+git log --prettry=fomat: format the output of a git log command to display specific fields check example
 
 man git-log --> local documentation on using the 'git log' command
 
@@ -59,6 +59,8 @@ git log --since="4 days ago"
 git log -S build
 
 git stat
+
+git log --pretty=format:"%h - %an - %ar - %s"
 
 ///
 
