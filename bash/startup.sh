@@ -19,7 +19,6 @@ system_info()
              echo ""
              echo $BASH_VERINFO
              echo ""
-             
 
      }
 
