@@ -1,0 +1,53 @@
+FMT_BOLD="\e[1m"
+FMT_RESET="\e[0m"
+FMT_UNBOLD="\e[21m"
+FG_BLACK="\e[36m"
+FG_BLUE="\e[34m"
+FG_CYAN="\e[36m"
+FG_GREEN="\e[32m"
+FG_MAGENTA="\e[35m"
+FG_RED="\e[31m"
+FG_WHITE="\e[97m"
+BG_BLUE="\e[44m"
+BG_GREEN="\e[42m"
+BG_MAGENTA="\e[45m"
+function __short_wd_cygwin()
+{
+    num_dirs=3
+    newPWD="${PWD/#$HOME/~}"
+    if [ $(echo -n $newPWD | awk -F '/' '{print NF}') -gt $num_dirs ]; then
+        newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $1 "/.../" $(NF-1) "/" $(NF)}')
+    fi
+    echo -n "$newPWD"
+}
+function __short_wd_cygpath()
+{
+    num_dirs=3
+    newPWD=$(cygpath -C ANSI -w ${PWD/#$HOME/~})
+    if [ $(echo -n $newPWD | awk -F '\\' '{print NF}') -gt $num_dirs ]; then
+        newPWD=$(echo -n $newPWD | awk -F '\\' '{print $1 "\\...\\" $(NF-1) "\\" $(NF)}')
+    fi
+    echo -n $newPWD
+}
+FMT_RESET="\[\e[0m\]"
+FMT_UNBOLD="\[\e[22m\]"
+FG_BLACK="\[\e[30m\]"
+FG_BLUE="\[\e[34m\]"
+FG_CYAN="\[\e[36m\]"
+FG_GREEN="\[\e[32m\]"
+FG_GREY="\[\e[37m\]"
+FG_MAGENTA="\[\e[35m\]"
+FG_WHITE="\[\e[97m\]"
+BG_BLUE="\[\e[44m\]"
+BG_CYAN="\[\e[46m\]"
+BG_GREEN="\[\e[42m\]"
+BG_MAGENTA="\[\e[45m\]"
+export PS1=\
+"\n${FG_BLUE}╭─${FG_MAGENTA}◀${BG_MAGENTA}${FG_CYAN}${FMT_BOLD}\d ${FG_WHITE}\t${FMT_UNBOLD} ${FG_MAGENTA}${BG_BLUE}▶ "\
+"${FG_GREY}\$(__short_wd_cygwin) ${FG_BLUE}${BG_CYAN}▶ "\
+"${FG_BLACK}📂 \$(find . -mindepth 1 -maxdepth 1 -type d | wc -l) "\
+"📄 \$(find . -mindepth 1 -maxdepth 1 -type f | wc -l) "\
+"🔗 \$(find . -mindepth 1 -maxdepth 1 -type l | wc -l) "\
+"${FMT_RESET}${FG_CYAN}"\
+"\$(git branch 2> /dev/null | grep '^*' | colrm 1 2 | xargs -I BRANCH echo -n \"${BG_GREEN}▶${FG_BLACK}🔀 BRANCH ${FMT_RESET}${FG_GREEN}\")"\
+"\n${FG_BLUE}╰▶${FG_CYAN}🚀 ${FMT_RESET}"
