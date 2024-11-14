@@ -23,3 +23,18 @@ printf '%s' 'A' | awk '{for(i=1;i<=20;i++) printf $0}'
 for i in {1..40}; do echo -n 'A'; done; echo
 ```
 
+
+## Add string to file on a new line: 
+### If you are wondering check what `</>` do in bash (simply google it)
+> This adds it to the file but it will clear it:
+```bash
+echo '\n{{string}}' > {{file}}
+```
+> This adds appends an extra empty line.
+```bash
+echo '\n{{string}}' >> {{file}}
+```
+> This does not: 
+```bash
+echo -n '\n{{string}}' >> {{file}}
+```
